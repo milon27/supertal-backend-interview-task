@@ -1,6 +1,6 @@
 ## Develop a parking lot application where we should be able perform following operations:
 
-1. Parking manager can create parking lots with desired parking spaces/slots in each parking lot.
+1. [x]Parking manager can create parking lots with desired parking spaces/slots in each parking lot.
 2. User (Vehicle owner) can choose any parking lot & can park his vehicle in the nearest parking slot available in that lot (eg if parking slots are numbered 1,2,3....n, then we still start from 1 and pick the one that is available)
 3. User can unpark his vehicle
 4. When user unparks, response should be success along with the parking fee that will be calculated as Rs. 10 _ Number of hours the vehicle has been parked. eg If parked for 1 hour 5 minutes , it will be 10 _ 2 = 20

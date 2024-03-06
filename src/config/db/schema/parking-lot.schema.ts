@@ -18,4 +18,4 @@ export const ParkingLotSchema = mysqlTable("parking_lot_table", {
 })
 
 export type IParkingLot = typeof ParkingLotSchema.$inferSelect
-export type ICreateParkingLot = typeof ParkingLotSchema.$inferInsert
+// export type ICreateParkingLot = typeof ParkingLotSchema.$inferInsert

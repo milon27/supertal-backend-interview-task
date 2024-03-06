@@ -1,9 +1,15 @@
-import { CommonUtil } from "../../../utils/common.util"
+import { UserService } from "../../../feature/user/user.service"
 import { myLogger } from "../../logger"
 
 export const runSeed = async () => {
     myLogger().info("seeding...")
-    await CommonUtil.fakeAwait()
+    // create manager
+    await UserService.createUser({
+        fullName: "manager",
+        email: "manager@gmail.com",
+        password: "1234567",
+        isSuperAdmin: true,
+    })
     myLogger().info("Seed Done")
     process.exit(0)
 }

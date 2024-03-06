@@ -1,7 +1,7 @@
 {
   "version": "5",
   "dialect": "mysql",
-  "id": "d8119f23-d14e-42de-a875-6784f1c4fe2b",
+  "id": "222e6ae8-2689-4620-8c56-a4c350698e83",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "parking_lot_table": {
@@ -74,6 +74,20 @@
     "parking_record_table": {
       "name": "parking_record_table",
       "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "lot_id": {
+          "name": "lot_id",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
         "slot_id": {
           "name": "slot_id",
           "type": "varchar(50)",
@@ -100,7 +114,7 @@
           "name": "exit_time",
           "type": "datetime",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "autoincrement": false
         },
         "created_at": {
@@ -114,6 +128,19 @@
       },
       "indexes": {},
       "foreignKeys": {
+        "parking_record_table_lot_id_parking_lot_table_id_fk": {
+          "name": "parking_record_table_lot_id_parking_lot_table_id_fk",
+          "tableFrom": "parking_record_table",
+          "tableTo": "parking_lot_table",
+          "columnsFrom": [
+            "lot_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
         "parking_record_table_slot_id_parking_slot_table_id_fk": {
           "name": "parking_record_table_slot_id_parking_slot_table_id_fk",
           "tableFrom": "parking_record_table",
@@ -142,16 +169,23 @@
         }
       },
       "compositePrimaryKeys": {
-        "parking_record_table_slot_id_vehicle_id_exit_time_pk": {
-          "name": "parking_record_table_slot_id_vehicle_id_exit_time_pk",
+        "parking_record_table_id": {
+          "name": "parking_record_table_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {
+        "uq": {
+          "name": "uq",
           "columns": [
             "slot_id",
             "vehicle_id",
             "exit_time"
           ]
         }
-      },
-      "uniqueConstraints": {}
+      }
     },
     "parking_slot_table": {
       "name": "parking_slot_table",

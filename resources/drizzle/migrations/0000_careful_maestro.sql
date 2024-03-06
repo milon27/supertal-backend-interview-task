@@ -8,12 +8,15 @@ CREATE TABLE `parking_lot_table` (
 );
 --> statement-breakpoint
 CREATE TABLE `parking_record_table` (
+	`id` varchar(50) NOT NULL,
+	`lot_id` varchar(50) NOT NULL,
 	`slot_id` varchar(50) NOT NULL,
 	`vehicle_id` varchar(50) NOT NULL,
 	`entry_time` datetime NOT NULL DEFAULT (CURRENT_TIMESTAMP),
-	`exit_time` datetime NOT NULL,
+	`exit_time` datetime,
 	`created_at` datetime NOT NULL DEFAULT (CURRENT_TIMESTAMP),
-	CONSTRAINT `parking_record_table_slot_id_vehicle_id_exit_time_pk` PRIMARY KEY(`slot_id`,`vehicle_id`,`exit_time`)
+	CONSTRAINT `parking_record_table_id` PRIMARY KEY(`id`),
+	CONSTRAINT `uq` UNIQUE(`slot_id`,`vehicle_id`,`exit_time`)
 );
 --> statement-breakpoint
 CREATE TABLE `parking_slot_table` (
@@ -60,6 +63,7 @@ CREATE TABLE `vehicle_table` (
 );
 --> statement-breakpoint
 ALTER TABLE `parking_lot_table` ADD CONSTRAINT `parking_lot_table_user_id_user_table_id_fk` FOREIGN KEY (`user_id`) REFERENCES `user_table`(`id`) ON DELETE no action ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE `parking_record_table` ADD CONSTRAINT `parking_record_table_lot_id_parking_lot_table_id_fk` FOREIGN KEY (`lot_id`) REFERENCES `parking_lot_table`(`id`) ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE `parking_record_table` ADD CONSTRAINT `parking_record_table_slot_id_parking_slot_table_id_fk` FOREIGN KEY (`slot_id`) REFERENCES `parking_slot_table`(`id`) ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE `parking_record_table` ADD CONSTRAINT `parking_record_table_vehicle_id_vehicle_table_id_fk` FOREIGN KEY (`vehicle_id`) REFERENCES `vehicle_table`(`id`) ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE `parking_slot_table` ADD CONSTRAINT `parking_slot_table_lot_id_parking_lot_table_id_fk` FOREIGN KEY (`lot_id`) REFERENCES `parking_lot_table`(`id`) ON DELETE no action ON UPDATE no action;--> statement-breakpoint

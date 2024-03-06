@@ -1,5 +1,6 @@
-import { sql } from "drizzle-orm"
+import { relations, sql } from "drizzle-orm"
 import { boolean, datetime, mysqlTable, varchar } from "drizzle-orm/mysql-core"
+import { ParkingSlotSchema } from "./parking-slot.schema"
 import { UserSchema } from "./user.schema"
 
 // 1 user (manager) can have many parking lot
@@ -19,3 +20,8 @@ export const ParkingLotSchema = mysqlTable("parking_lot_table", {
 
 export type IParkingLot = typeof ParkingLotSchema.$inferSelect
 // export type ICreateParkingLot = typeof ParkingLotSchema.$inferInsert
+
+// define relation
+export const ParkingLotRelation = relations(ParkingLotSchema, ({ many }) => {
+    return { slots: many(ParkingSlotSchema) }
+})

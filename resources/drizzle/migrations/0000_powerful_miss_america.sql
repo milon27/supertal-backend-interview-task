@@ -11,8 +11,9 @@ CREATE TABLE `parking_record_table` (
 	`slot_id` varchar(50) NOT NULL,
 	`vehicle_id` varchar(50) NOT NULL,
 	`entry_time` datetime NOT NULL DEFAULT (CURRENT_TIMESTAMP),
-	`exit_time` datetime,
-	`created_at` datetime NOT NULL DEFAULT (CURRENT_TIMESTAMP)
+	`exit_time` datetime NOT NULL,
+	`created_at` datetime NOT NULL DEFAULT (CURRENT_TIMESTAMP),
+	CONSTRAINT `parking_record_table_slot_id_vehicle_id_exit_time_pk` PRIMARY KEY(`slot_id`,`vehicle_id`,`exit_time`)
 );
 --> statement-breakpoint
 CREATE TABLE `parking_slot_table` (

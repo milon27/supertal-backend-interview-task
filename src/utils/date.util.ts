@@ -1,4 +1,4 @@
-import { format } from "date-fns"
+import { differenceInMinutes, format } from "date-fns"
 import { utcToZonedTime } from "date-fns-tz"
 import { Constant } from "../config/constant/common.constant"
 
@@ -37,6 +37,20 @@ const DateUtil = {
             Date.UTC(date.getFullYear(), date.getMonth(), dateOfMonth, hours, minutes, seconds, 0)
         )
         return dateObject
+    },
+    roundTotalTime: (startTime: Date, endTime: Date) => {
+        // Example start and end times
+        // const startTime = new Date("2024-03-06T10:00:00")
+        // const endTime = new Date("2024-03-06T11:02:00")
+
+        // Calculate the difference in minutes
+        const timeDifference = differenceInMinutes(endTime, startTime)
+
+        // Round up the total time to the nearest hour
+        const totalHours = Math.ceil(timeDifference / 60)
+
+        // console.log("Total time:", totalHours, "hours")
+        return totalHours
     },
 }
 export default DateUtil

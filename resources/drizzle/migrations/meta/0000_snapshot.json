@@ -1,7 +1,7 @@
 {
   "version": "5",
   "dialect": "mysql",
-  "id": "cfa251ab-0efe-41b1-be6d-bca7b6b99776",
+  "id": "d8119f23-d14e-42de-a875-6784f1c4fe2b",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "parking_lot_table": {
@@ -100,7 +100,7 @@
           "name": "exit_time",
           "type": "datetime",
           "primaryKey": false,
-          "notNull": false,
+          "notNull": true,
           "autoincrement": false
         },
         "created_at": {
@@ -141,7 +141,16 @@
           "onUpdate": "no action"
         }
       },
-      "compositePrimaryKeys": {},
+      "compositePrimaryKeys": {
+        "parking_record_table_slot_id_vehicle_id_exit_time_pk": {
+          "name": "parking_record_table_slot_id_vehicle_id_exit_time_pk",
+          "columns": [
+            "slot_id",
+            "vehicle_id",
+            "exit_time"
+          ]
+        }
+      },
       "uniqueConstraints": {}
     },
     "parking_slot_table": {

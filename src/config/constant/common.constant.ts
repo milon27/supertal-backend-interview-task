@@ -4,6 +4,7 @@ export const Constant = {
     DEFAULT_PASSWORD: "123456",
     GOOGLE_PASSWORD: "nestpress1234",
     DEFAULT_ADMIN_PASSWORD: "nestpress1234",
+    PER_HOUR_PRICE: 10,
     EMPTY: "EMPTY",
     CURRENCY: "usd",
     TIMEZONE: "Asia/Dhaka",

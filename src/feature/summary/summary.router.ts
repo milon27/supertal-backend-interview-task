@@ -7,6 +7,7 @@ const SummaryRouter = Router()
 SummaryRouter.use(AuthMid.isSuperAdmin)
 
 /**
+ * @manger
  * @description get all summary
  * @url {{BASE_URL}}/v1/summary/
  */

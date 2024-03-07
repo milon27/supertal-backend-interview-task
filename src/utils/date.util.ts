@@ -45,7 +45,6 @@ const DateUtil = {
 
         // Calculate the difference in minutes
         const timeDifference = differenceInMinutes(endTime, startTime)
-
         // Round up the total time to the nearest hour
         const totalHours = Math.ceil(timeDifference / 60)
 

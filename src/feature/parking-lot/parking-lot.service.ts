@@ -1,7 +1,9 @@
-import { desc } from "drizzle-orm"
+import { desc, eq, isNull } from "drizzle-orm"
 import { ICurrentUser } from "../../common/model/current-user.model"
 import { db } from "../../config/db/db"
 import { ParkingLotSchema } from "../../config/db/schema/parking-lot.schema"
+import { ParkingRecordSchema } from "../../config/db/schema/parking-record.schema"
+import { ParkingSlotSchema } from "../../config/db/schema/parking-slot.schema"
 import { CommonUtil, UniqueId } from "../../utils/common.util"
 import { ICreateParkingLotDto } from "./dto/parking-lot.dto"
 
@@ -19,6 +21,27 @@ export const ParkingLotService = {
             .orderBy(desc(ParkingLotSchema.createdAt))
             .limit(limit)
             .offset(offset)
+
+        return list
+    },
+    /**
+     * get logged in manager lot status (which cars are parked in which slots)
+     * @param user
+     * @returns
+     */
+    getSingleLot: async (lotId: string) => {
+        const list = await db.query.ParkingSlotSchema.findMany({
+            with: {
+                records: {
+                    with: {
+                        slot: true,
+                        vehicle: true,
+                    },
+                    where: isNull(ParkingRecordSchema.exitTime), // only show which slot are available + currently booked
+                },
+            },
+            where: eq(ParkingSlotSchema.lotId, lotId),
+        })
 
         return list
     },

@@ -68,19 +68,28 @@ export const ParkingRecordService = {
             .from(VehicleSchema)
             .where(eq(VehicleSchema.userId, user.id))
 
-        const list = await db
-            .select()
-            .from(ParkingRecordSchema)
-            .where(inArray(ParkingRecordSchema.vehicleId, allVehicles))
+        const list = await db.query.ParkingRecordSchema.findMany({
+            with: {
+                vehicle: true,
+                slot: true,
+            },
+            where: inArray(ParkingRecordSchema.vehicleId, allVehicles),
+        })
+
         return list
     },
     unparkVehicle: async (unpark: IUnparkVehicleDtoDto) => {
-        await db
+        const result = await db
             .update(ParkingRecordSchema)
             .set({
                 exitTime: new Date(),
             })
-            .where(and(eq(ParkingRecordSchema.id, unpark.id)))
+            .where(and(eq(ParkingRecordSchema.id, unpark.id), isNull(ParkingRecordSchema.exitTime)))
+
+        // check if there is anything to update
+        if (result[0].affectedRows === 0) {
+            throw new BadRequestError("Vehicle is already un-parked")
+        }
         // now calculate the price
         const data = await db
             .select()
@@ -89,6 +98,7 @@ export const ParkingRecordService = {
 
         const totalTime = DateUtil.roundTotalTime(data[0].entryTime, data[0].exitTime!)
         const totalPrice = totalTime * Constant.PER_HOUR_PRICE
+
         return {
             totalTime,
             totalPrice,

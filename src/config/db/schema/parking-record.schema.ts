@@ -46,11 +46,11 @@ export const ParkingRecordRelation = relations(ParkingRecordSchema, ({ one }) =>
             references: [ParkingLotSchema.id],
         }),
         slot: one(ParkingSlotSchema, {
-            fields: [ParkingRecordSchema.lotId],
+            fields: [ParkingRecordSchema.slotId],
             references: [ParkingSlotSchema.id],
         }),
         vehicle: one(VehicleSchema, {
-            fields: [ParkingRecordSchema.lotId],
+            fields: [ParkingRecordSchema.vehicleId],
             references: [VehicleSchema.id],
         }),
     }

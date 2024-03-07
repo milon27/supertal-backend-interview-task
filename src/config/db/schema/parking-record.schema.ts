@@ -1,4 +1,4 @@
-import { sql } from "drizzle-orm"
+import { relations, sql } from "drizzle-orm"
 import { datetime, mysqlTable, varchar } from "drizzle-orm/mysql-core"
 import { ParkingLotSchema } from "./parking-lot.schema"
 import { ParkingSlotSchema } from "./parking-slot.schema"
@@ -37,3 +37,21 @@ export const ParkingRecordSchema = mysqlTable(
 
 export type IParkingRecord = typeof ParkingRecordSchema.$inferSelect
 export type ICreateParkingRecord = typeof ParkingRecordSchema.$inferInsert
+
+// define relation
+export const ParkingRecordRelation = relations(ParkingRecordSchema, ({ one }) => {
+    return {
+        lot: one(ParkingLotSchema, {
+            fields: [ParkingRecordSchema.lotId],
+            references: [ParkingLotSchema.id],
+        }),
+        slot: one(ParkingSlotSchema, {
+            fields: [ParkingRecordSchema.lotId],
+            references: [ParkingSlotSchema.id],
+        }),
+        vehicle: one(VehicleSchema, {
+            fields: [ParkingRecordSchema.lotId],
+            references: [VehicleSchema.id],
+        }),
+    }
+})

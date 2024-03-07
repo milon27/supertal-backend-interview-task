@@ -1,5 +1,6 @@
-import { sql } from "drizzle-orm"
+import { relations, sql } from "drizzle-orm"
 import { datetime, mysqlTable, varchar } from "drizzle-orm/mysql-core"
+import { ParkingRecordSchema } from "./parking-record.schema"
 import { UserSchema } from "./user.schema"
 
 //  1 user can have many vehicle
@@ -19,3 +20,10 @@ export const VehicleSchema = mysqlTable("vehicle_table", {
 
 export type IVehicle = typeof VehicleSchema.$inferSelect
 export type ICreateVehicle = typeof VehicleSchema.$inferInsert
+
+// define relation
+export const VehicleRelation = relations(VehicleSchema, ({ many }) => {
+    return {
+        records: many(ParkingRecordSchema),
+    }
+})

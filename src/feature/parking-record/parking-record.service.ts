@@ -12,7 +12,17 @@ import { ICreateParkingRecordDto, IUnparkVehicleDtoDto } from "./dto/parking-rec
 
 export const ParkingRecordService = {
     add: async (record: ICreateParkingRecordDto) => {
-        // find available slot on that lot
+        // *check if vehicle is already parked
+        const alreadyParked = await db
+            .select()
+            .from(ParkingRecordSchema)
+            .where(and(eq(ParkingRecordSchema.vehicleId, record.vehicleId), isNull(ParkingRecordSchema.exitTime)))
+
+        if (alreadyParked.length > 0) {
+            throw new BadRequestError("Vehicle Already Parked")
+        }
+
+        // * find available slot on that lot (which is not already booked or not in maintenance mode)
         const blockedSlot = db
             .select({
                 slotId: ParkingRecordSchema.slotId,
@@ -25,12 +35,19 @@ export const ParkingRecordService = {
                 id: ParkingSlotSchema.id,
             })
             .from(ParkingSlotSchema)
-            .where(and(notInArray(ParkingSlotSchema.id, blockedSlot)))
+            .where(
+                and(
+                    notInArray(ParkingSlotSchema.id, blockedSlot),
+                    eq(ParkingSlotSchema.isUnderMaintenance, false),
+                    eq(ParkingSlotSchema.lotId, record.lotId)
+                )
+            )
             .orderBy(asc(ParkingSlotSchema.id))
 
         if (availableSlot.length === 0) {
             throw new BadRequestError("No Slot available")
         }
+        // * insert
         const id = UniqueId.createUlid()
         const recordObj: ICreateParkingRecord = {
             id,

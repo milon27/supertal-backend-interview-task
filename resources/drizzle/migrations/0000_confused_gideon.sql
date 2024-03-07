@@ -15,8 +15,7 @@ CREATE TABLE `parking_record_table` (
 	`entry_time` datetime NOT NULL DEFAULT (CURRENT_TIMESTAMP),
 	`exit_time` datetime,
 	`created_at` datetime NOT NULL DEFAULT (CURRENT_TIMESTAMP),
-	CONSTRAINT `parking_record_table_id` PRIMARY KEY(`id`),
-	CONSTRAINT `uq` UNIQUE(`slot_id`,`vehicle_id`,`exit_time`)
+	CONSTRAINT `parking_record_table_id` PRIMARY KEY(`id`)
 );
 --> statement-breakpoint
 CREATE TABLE `parking_slot_table` (
@@ -55,7 +54,7 @@ CREATE TABLE `user_table` (
 CREATE TABLE `vehicle_table` (
 	`id` varchar(50) NOT NULL,
 	`title` varchar(255) NOT NULL,
-	`registration_number` varchar(50),
+	`registration_number` varchar(50) NOT NULL,
 	`user_id` varchar(50) NOT NULL,
 	`created_at` datetime NOT NULL DEFAULT (CURRENT_TIMESTAMP),
 	CONSTRAINT `vehicle_table_id` PRIMARY KEY(`id`),

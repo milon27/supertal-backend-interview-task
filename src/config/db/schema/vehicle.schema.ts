@@ -6,7 +6,7 @@ import { UserSchema } from "./user.schema"
 export const VehicleSchema = mysqlTable("vehicle_table", {
     id: varchar("id", { length: 50 }).primaryKey(),
     title: varchar("title", { length: 255 }).notNull(),
-    registrationNumber: varchar("registration_number", { length: 50 }).unique(),
+    registrationNumber: varchar("registration_number", { length: 50 }).notNull().unique(),
 
     userId: varchar("user_id", { length: 50 })
         .notNull()

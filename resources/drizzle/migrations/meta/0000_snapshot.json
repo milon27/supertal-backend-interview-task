@@ -1,7 +1,7 @@
 {
   "version": "5",
   "dialect": "mysql",
-  "id": "222e6ae8-2689-4620-8c56-a4c350698e83",
+  "id": "3a8c04d8-451a-4e74-9eda-b0c715330e32",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "parking_lot_table": {
@@ -176,16 +176,7 @@
           ]
         }
       },
-      "uniqueConstraints": {
-        "uq": {
-          "name": "uq",
-          "columns": [
-            "slot_id",
-            "vehicle_id",
-            "exit_time"
-          ]
-        }
-      }
+      "uniqueConstraints": {}
     },
     "parking_slot_table": {
       "name": "parking_slot_table",
@@ -437,7 +428,7 @@
           "name": "registration_number",
           "type": "varchar(50)",
           "primaryKey": false,
-          "notNull": false,
+          "notNull": true,
           "autoincrement": false
         },
         "user_id": {

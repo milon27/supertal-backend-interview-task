@@ -25,5 +25,7 @@ export const ParkingLotService = {
     add: async (lot: ICreateParkingLotDto, user: ICurrentUser) => {
         const id = UniqueId.createUlid()
         await db.insert(ParkingLotSchema).values({ id, userId: user.id, ...lot })
+        // .onDuplicateKeyUpdate({ set: { id: sql`id` } })
+        return id
     },
 }

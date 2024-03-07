@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm"
-import { datetime, mysqlTable, unique, varchar } from "drizzle-orm/mysql-core"
+import { datetime, mysqlTable, varchar } from "drizzle-orm/mysql-core"
 import { ParkingLotSchema } from "./parking-lot.schema"
 import { ParkingSlotSchema } from "./parking-slot.schema"
 import { VehicleSchema } from "./vehicle.schema"
@@ -26,12 +26,13 @@ export const ParkingRecordSchema = mysqlTable(
         createdAt: datetime("created_at")
             .default(sql`(CURRENT_TIMESTAMP)`)
             .notNull(),
-    },
-    (table) => {
-        return {
-            uq: unique("uq").on(table.slotId, table.vehicleId, table.exitTime),
-        }
     }
+    // (table) => {
+    //     return {
+    //         uqSlot: unique("uq_slot").on(table.slotId, table.vehicleId, table.exitTime),
+    //         // uqVehicle: unique("uq_vehicle").on(table.vehicleId, table.exitTime),
+    //     }
+    // }
 )
 
 export type IParkingRecord = typeof ParkingRecordSchema.$inferSelect

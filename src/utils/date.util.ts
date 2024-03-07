@@ -1,5 +1,4 @@
 import { differenceInMinutes, format } from "date-fns"
-import { utcToZonedTime } from "date-fns-tz"
 import { Constant } from "../config/constant/common.constant"
 
 const DateUtil = {
@@ -22,7 +21,8 @@ const DateUtil = {
      * @returns e.g 24th Nov, 1st jan
      */
     getOnlyDate: (date: Date, timeZone: string = Constant.TIMEZONE) => {
-        return format(utcToZonedTime(date, timeZone), "do MMM")
+        // return format(utcToZonedTime(date, timeZone), "do MMM")
+        return format(date, "do MMM")
     },
     /**
      * @description it should receive UTC time as string

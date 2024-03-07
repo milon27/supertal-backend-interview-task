@@ -14,13 +14,15 @@ export const ParkingLotService = {
     getAll: async (page: number, pageSize: number) => {
         const { limit, offset } = CommonUtil.getLimitOffset(page, pageSize)
 
-        const list = await db
-            .select()
-            .from(ParkingLotSchema)
-            // .where(eq(ParkingLotSchema.userId, managerId)) // maybe in future if we want multiple manager
-            .orderBy(desc(ParkingLotSchema.createdAt))
-            .limit(limit)
-            .offset(offset)
+        const list = await db.query.ParkingLotSchema.findMany({
+            with: {
+                slots: true,
+            },
+            // where:eq(ParkingLotSchema.userId, managerId) // maybe in future if we want multiple manager
+            orderBy: desc(ParkingLotSchema.createdAt),
+            limit,
+            offset,
+        })
 
         return list
     },

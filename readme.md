@@ -1,22 +1,4 @@
-# Nestpress boilerplate with Authentication module
-
-## How to use this template using [nestpress cli](https://www.npmjs.com/package/nestpress).
-
-```bash
-# create project
-npx nestpress@latest init
-
-# create author, blog, category module (by default it will create single module)
-
-# create a author module on src/feature/ directory
-npx nestpress@latest module author
-# create a blog multi module on src/feature/ directory [-m for multi module]
-npx nestpress@latest module blog -m
-# create a category module as blog sub module on src/feature/blog directory
-npx nestpress@latest module category blog
-
-# for more use of nestpress cli checkout this: https://www.npmjs.com/package/nestpress
-```
+# Parking Lot management
 
 ## How to run
 
@@ -39,6 +21,41 @@ npx nestpress@latest module category blog
     # run the app
     pnpm dev # Api will run on port 4000
     ```
+
+## Feature & Api Explanation
+
+1. [x] **Create 1 Parking Manager, 2 Lots and 3 Slots using seed file**
+    - seed command
+        - `pnpm db:seed`
+    - manger login details
+        - email: manager@gmail.com
+        - password: 1234567
+2. [x] **Customer/ User/ Manager Authentication and Add Vehicle Details**
+    - Auth
+        - [Register A User - Postman](https://www.postman.com/m27lab/workspace/classroom/request/12238877-f6f0f8ec-36a2-42b0-9430-4362f2c8d8d1)
+        - [Login As User/Manager - Postman](https://www.postman.com/m27lab/workspace/classroom/request/12238877-3bf07f29-1e06-4f78-97a8-b56b2c6a1f73)
+        - [Logout User - Postman](https://www.postman.com/m27lab/workspace/classroom/request/12238877-5a7f013c-f0a0-4ca8-ad11-bff8edb5a4ed)
+        - [Get Logged in User - Postman](https://www.postman.com/m27lab/workspace/classroom/request/12238877-5d2663b6-b140-4a1d-815a-7fcdadddd01b)
+    - Vehicle (add, get for logged in user)
+        - [Add New Vehicle - Postman](https://www.postman.com/m27lab/workspace/classroom/request/12238877-7d51758d-5654-457a-9ec9-4aa23e0429da)
+        - [Get List of Vehicle - Postman](https://www.postman.com/m27lab/workspace/classroom/request/12238877-983b6cd5-d1c9-4dab-8e07-277e6de02cd4)
+3. [x] **Manager can create parking lots with desired parking spaces/slots in each parking lot.**
+    - Parking Lot
+        - [All parking lot - Postman](https://www.postman.com/m27lab/workspace/classroom/request/12238877-3e6d4947-3aed-499e-8ea5-4c9c7171d464)
+        - [Create parking lot - Postman](https://www.postman.com/m27lab/workspace/classroom/request/12238877-38de8d5f-8de4-453f-b71c-502894785299)
+        - _Parking manager can view his current parking lot status (eg which cars are parked in which slots)_
+            - [Get Single Parking Lot (Status) - Postman](https://www.postman.com/m27lab/workspace/classroom/request/12238877-b4bb4bc6-3c60-42da-a5b3-700f3f7bdb90)
+    - Parking Slot
+        - [Create parking slot - Postman](https://www.postman.com/m27lab/workspace/classroom/request/12238877-5c8bee50-935c-46cf-aab8-896b3e0fc1bb)
+        - _Parking manager can put any parking space/slot into maintenance mode and back to working state at any time_
+            - [Update Parking Slot - Postman](https://www.postman.com/m27lab/workspace/classroom/request/12238877-ab330aab-372c-4c68-bd08-99416f68f163)
+4. [x] **User (Vehicle owner) can choose any parking lot & can park his vehicle in the nearest parking slot available in that lot (eg if parking slots are numbered 1,2,3....n, then we still start from 1 and pick the one that is available)**
+    - [Park a vehicle with lot id & vehicle id - Postman](https://www.postman.com/m27lab/workspace/classroom/request/12238877-646a49d6-74a4-4d27-9325-875c4ab9a612)
+5. [x] **User can unpark his vehicle,response should be success along with the parking fee that will be calculated as Rs. 10 _ Number of hours the vehicle has been parked. eg If parked for 1 hour 5 minutes , it will be 10 _ 2 = 20**
+    - [Get logged in user parked vehicle list - Postman](https://www.postman.com/m27lab/workspace/classroom/request/12238877-60a75acb-e3b7-4bfb-ae04-745bc3eea4b3)
+    - [Un-Park a vehicle & Get Total Fee - Postman](https://www.postman.com/m27lab/workspace/classroom/request/12238877-307a41ab-0735-4fca-ade2-07c4af0b49bf)
+6. [x] **Parking Manager should be able to get total number of vehicles parked on any day, total parking time and the total fee collected on that day.**
+    - [Summary Api - Postman](https://www.postman.com/m27lab/workspace/classroom/request/12238877-1756f2c8-4334-41f3-8a87-f564ab11e364)
 
 ## Update npm dependencies
 

@@ -1,6 +1,6 @@
 {
     "name": "nestpress-server",
-    "version": "1.0.20",
+    "version": "1.0.21",
     "description": "Nestpress Server",
     "main": "dist/src/server.js",
     "scripts": {

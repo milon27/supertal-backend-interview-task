@@ -1,5 +1,5 @@
 import { Router } from "express"
-import { IdParamDto } from "../../common/dto/params.dto"
+import { GetAllQueryParamDto, IdParamDto } from "../../common/dto/params.dto"
 import { AuthMid } from "../../middleware/auth.mid"
 import { validateMid } from "../../middleware/validate.mid"
 import { CreateParkingLotDto } from "./dto/parking-lot.dto"
@@ -10,9 +10,19 @@ const ParkingLotRouter = Router()
 ParkingLotRouter.use(AuthMid.isLoggedInMid)
 
 /**
+ * @description get all parking-lot
+ * @url {{BASE_URL}}/v1/parking-lot/
+ */
+ParkingLotRouter.get(
+    "/",
+    // AuthMid.isSuperAdmin,
+    validateMid({ query: GetAllQueryParamDto }),
+    ParkingLotController.getAll
+)
+/**
  * @manager
- * @description get parking-slot status filter by lot id
- * @url {{BASE_URL}}/parking-slot/:id
+ * @description get parking-lot status filter by lot id
+ * @url {{BASE_URL}}/v1/parking-lot/:id
  */
 ParkingLotRouter.get(
     "/:id",

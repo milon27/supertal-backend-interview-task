@@ -4,6 +4,7 @@ import HealthCheckRouter from "../../feature/health-check/health-check.router"
 import ParkingLotRouter from "../../feature/parking-lot/parking-lot.router"
 import ParkingRecordRouter from "../../feature/parking-record/parking-record.router"
 import ParkingSlotRouter from "../../feature/parking-slot/parking-slot.router"
+import SummaryRouter from "../../feature/summary/summary.router"
 import UserRouter from "../../feature/user/user.router"
 import VehicleRouter from "../../feature/vehicle/vehicle.router"
 
@@ -16,5 +17,6 @@ v1Router.use(`/vehicle`, VehicleRouter)
 v1Router.use(`/parking-lot`, ParkingLotRouter)
 v1Router.use(`/parking-slot`, ParkingSlotRouter)
 v1Router.use(`/parking-record`, ParkingRecordRouter)
+v1Router.use(`/summary`, SummaryRouter)
 
 export default v1Router

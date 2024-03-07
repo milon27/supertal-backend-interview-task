@@ -6,7 +6,7 @@
 4. [x] When user unparks, response should be success along with the parking fee that will be calculated as Rs. 10 _ Number of hours the vehicle has been parked. eg If parked for 1 hour 5 minutes , it will be 10 _ 2 = 20
 5. [x] Parking manager can view his current parking lot status (eg which cars are parked in which slots)
 6. [x] Parking manager can put any parking space/slot into maintenance mode and back to working state at any time.
-7. Parking Manager should be able to get total number of vehicles parked on any day, total parking time and the total fee collected on that day.
+7. [x] Parking Manager should be able to get total number of vehicles parked on any day, total parking time and the total fee collected on that day.
 
 ## start
 

@@ -1,6 +1,6 @@
 {
     "name": "nestpress-server",
-    "version": "1.0.22",
+    "version": "1.0.23",
     "description": "Nestpress Server",
     "main": "dist/src/server.js",
     "scripts": {
@@ -18,7 +18,7 @@
         "db:migrate:prod": "node dist/src/config/db/utils/migrator.js",
         "db:seed:prod": "node dist/src/config/db/utils/seed.js",
         "redis:clean": "ts-node --files src/config/redis/utils/clean.ts",
-        "db:all:clean": "pnpm db:clean && pnpm redis:clean && pnpm db:seed",
+        "db:clean:seed": "pnpm db:clean && pnpm redis:clean && pnpm db:seed",
         "np": "nestpress ",
         "version:inc": "npm version patch --no-git-tag-version && git add .",
         "all:update": "pnpm update -i -L",

@@ -24,6 +24,8 @@
 
 ## Feature & Api Explanation
 
+> [Youtube Video Explaining the API](https://www.youtube.com/watch?v=ZPuEVA5FrAg&ab_channel=M27Lab)
+
 1. [x] **Create 1 Parking Manager, 2 Lots and 3 Slots using seed file**
     - seed command
         - `pnpm db:seed`

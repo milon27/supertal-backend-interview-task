@@ -26,6 +26,8 @@
 
 > [Youtube Video Explaining the API](https://www.youtube.com/watch?v=ZPuEVA5FrAg&ab_channel=M27Lab)
 
+> if postman url not working, import from `.doc/PARKING-LOT.postman_collection.json` in your own postman
+
 1. [x] **Create 1 Parking Manager, 2 Lots and 3 Slots using seed file**
     - seed command
         - `pnpm db:seed`
